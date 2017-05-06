@@ -11,4 +11,10 @@ Rails.application.routes.draw do
     delete :destroy, on: :collection
   end
 
+  namespace :api, defaults: {format: :json} do
+  namespace :v1 do
+    resources :foods, only: [:index, :show, :create]
+  end
+end
+
 end
