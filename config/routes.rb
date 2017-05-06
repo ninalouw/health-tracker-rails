@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  # get '/' => 'home#index', as: :home
+  root 'home#index'
   # Our foods routes
   resources :foods
+  resources :users, only: [:create, :new, :update] do
+    get :foods_list, on: :collection
+  end
+  resources :sessions, only: [:new, :create] do
+    delete :destroy, on: :collection
+  end
+
 end

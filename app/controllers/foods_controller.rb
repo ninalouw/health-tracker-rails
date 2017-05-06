@@ -1,13 +1,15 @@
 class FoodsController < ApplicationController
   before_action :find_food, only: [:edit, :update, :destroy, :show]
+  before_action :authenticate_user,  except: [:index, :show]
 
   def new
     @food = Food.new
+    @category = Category.all
   end
 
   def create
     @food = Food.new food_params
-    # @food.user = current_user
+    @food.user = current_user
     if @food.save
       flash[:notice] = 'Food Created'
       redirect_to food_path(@food)
@@ -18,16 +20,19 @@ class FoodsController < ApplicationController
   end
 
   def index
-  @foods = Food.order(created_at: :desc)
+  # @foods = Food.order(created_at: :desc)
+  @foods = current_user.foods
   respond_to do |format|
     format.html { render }
     format.text { render }
     format.xml  { render xml: @food }
-    format.json { render json: @food.to_json }
+    format.json { render json: @food.to_json}
   end
 end
 
-def edit; end
+def edit
+  @category = Category.all
+end
 
 def update
   if @food.update food_params
@@ -44,7 +49,7 @@ def show
     format.html { render }
     format.text { render }
     format.xml  { render xml: @food }
-    format.json { render json: @food.to_json }
+    format.json { render json: @food.to_json(include: :categories)  }
   end
 end
 
@@ -56,8 +61,7 @@ end
   private
 
   def food_params
-    params.require(:food).permit([:title, :category,
-                                  :calories, :macro_group, :date])
+    params.require(:food).permit([:title,:calories,:category_id, :macro_group, :date])
   end
 
   def find_food

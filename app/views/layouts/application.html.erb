@@ -4,7 +4,6 @@
   <head>
     <title>HealthTracker</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -27,10 +26,36 @@
 
       <div class="navbar-collapse collapse" id="health-tracker-navbar">
         <ul class="nav navbar-nav">
+          <li><%= link_to 'Home', root_path %></li>
           <li><%= link_to 'New Food', new_food_path %></li>
           <li><%= link_to 'Your Foods', foods_path %></li>
         </ul>
-        <!-- User stuff goes here -->
+              <!-- User stuff goes here -->
+         <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <li>
+            <p class="navbar-text">Hello, <%= current_user.first_name %></p>
+          </li>
+          <li>
+            <%= button_to 'Sign out',
+              sessions_path,
+              method: :delete,
+              class: 'btn btn-primart navbar-btn'
+              %>
+            </li>
+        <% else %>
+        <div class="dropdown">
+          <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button btn btn-primary" aria-haspopup="true" aria-expanded="false">
+            Sign In or Sign Up
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dLabel">
+            <li><%= link_to 'Sign up with Email', new_user_path %></li>
+            <li><%= link_to 'Sign In', new_session_path %></li>
+          <% end %>
+          </ul>
+        </div>
+      </ul>
       </div>
     </div>
   </nav>
