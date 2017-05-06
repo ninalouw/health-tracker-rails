@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  # before_create :generate_api_key
+before_create :generate_api_key
 has_secure_password
 before_validation :downcase_email
 
@@ -22,6 +22,17 @@ private
 
 def downcase_email
   email.downcase! if email.present?
+end
+
+def generate_api_key
+  self.api_key = SecureRandom.hex(32)
+  loop do
+    if User.exists?(api_key: api_key)
+      self.api_key = SecureRandom.hex(32)
+    else
+      break
+    end
+  end
 end
 
 end

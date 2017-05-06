@@ -1,5 +1,4 @@
 class Api::V1::FoodsController < ApplicationController
-  protect_from_forgery with: :null_session
 
   def create
   new_food_params = params.require(:food).permit(:title, :calories,
