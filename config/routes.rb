@@ -17,4 +17,10 @@ Rails.application.routes.draw do
   end
 end
 
+# get '/api/v1/foods/' => 'api/v1/foods#foods_list'
+
+# route to which our client-side application needs to POST the user's email
+# and password, when the user fills out the log in form.
+post '/login', to: "sessions#create"
+
 end
