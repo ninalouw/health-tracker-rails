@@ -8,13 +8,13 @@ class Api::BaseController < ApplicationController
   # end
   # helper_method :current_user
 
-  # private
+  private
 
-  # def authenticate
-  #   api_key = params[:api_key] || request.headers['Authorization']
-  #   @api_user = User.find_by api_key: api_key
-  #   head :unauthorized unless @api_user
-  # end
+  def authenticate
+    api_key = params[:api_key] || request.headers['Authorization']
+    @api_user = User.find_by api_key: api_key
+    head :unauthorized unless @api_user
+  end
 
   # Using JWT Token
   def logged_in?

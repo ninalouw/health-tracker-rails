@@ -13,11 +13,11 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
   namespace :v1 do
-    resources :foods, only: [:index, :show, :create]
+    resources :foods, only: [:show, :create]
   end
 end
 
-# get '/api/v1/foods/' => 'api/v1/foods#foods_list'
+get '/api/v1/foods/' => 'api/v1/foods#index'
 
 # route to which our client-side application needs to POST the user's email
 # and password, when the user fills out the log in form.

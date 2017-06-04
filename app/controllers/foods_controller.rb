@@ -10,6 +10,7 @@ class FoodsController < ApplicationController
   def create
     @food = Food.new food_params
     @food.user = current_user
+    # @food.user = User.first
     if @food.save
       flash[:notice] = 'Food Created'
       redirect_to food_path(@food)

@@ -5,6 +5,7 @@ class Api::V1::FoodsController < ApplicationController
                                                     :category_id)
     food = Food.new new_food_params
     food.user = @api_user
+    # food.user = User.find_by_id(6)
     if food.save
       render json: { id: food.id, status: :success }
     else
@@ -16,6 +17,7 @@ end
     # @foods = current_user.foods
     # no current_user, for now use User with id 6
     @foods = User.find_by_id(6).foods.order(created_at: :desc)
+    # @foods = Food.order(created_at: :desc)
     render json: @foods
   end
 
