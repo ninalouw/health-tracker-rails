@@ -7,7 +7,7 @@ class Api::V1::FoodsController < ActionController::Base
                                                    :category_id)
     food = Food.new(new_food_params)
     # food.user = @api_user
-    food.user = User.find_by_id(6)
+    food.user = User.last
     if food.save
       render json: { id: food.id, status: :success }
     else

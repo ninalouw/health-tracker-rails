@@ -8,6 +8,10 @@
 
 Category.create([{ title: 'Breakfast' }, { title: 'Lunch' },
                    { title: 'Dinner' }, { title: 'Snack' }, { title: 'Drink' }])
+# 5.times do
+#   Category.create({ title:     Faker::Book.genre })
+# end
+
 
 puts Cowsay.say('Generated 5 categories', 'random')
 
