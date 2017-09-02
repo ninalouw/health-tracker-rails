@@ -21,7 +21,7 @@ end
   post '/api/v1/foods/' => 'api/v1/foods#create'
   # post '/api/v1/foods/:id/' => 'api/v1/foods#update'
   delete '/api/v1/foods/:id/' => 'api/v1/foods#delete'
-  # patch '/api/v1/foods/:id/' => 'api/v1/foods#update'
+  patch '/api/v1/foods/:id/' => 'api/v1/foods#update'
   
 # route to which our client-side application needs to POST the user's email
 # and password, when the user fills out the log in form.
