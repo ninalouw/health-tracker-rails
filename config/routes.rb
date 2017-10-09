@@ -13,14 +13,13 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
   namespace :v1 do
-    resources :foods, only: [:show, :create, :index, :delete]
+    resources :foods, only: [:show, :create, :index, :destroy, :update]
   end
 end
 
   get '/api/v1/foods/' => 'api/v1/foods#index'
   post '/api/v1/foods/' => 'api/v1/foods#create'
-  # post '/api/v1/foods/:id/' => 'api/v1/foods#update'
-  delete '/api/v1/foods/:id/' => 'api/v1/foods#delete'
+  delete '/api/v1/foods/:id/' => 'api/v1/foods#destroy'
   patch '/api/v1/foods/:id/' => 'api/v1/foods#update'
   
 # route to which our client-side application needs to POST the user's email

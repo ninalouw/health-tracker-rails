@@ -22,22 +22,25 @@ class Api::V1::FoodsController < ActionController::Base
     render json: food
   end
 
+  def edit
+    @category = Category.all
+  end
+
   def update
     @food = Food.find params[:id]
     if @food.update food_params
-      flash[:notice] = 'Food updated'
       render json: @food
     else
       flash.now[:alert] = 'Please see errors below!'
     end
   end
 
-  def delete
+  def destroy
     @food = Food.find params[:id]
     @food.destroy
-    render json: @food
   end
 
+  private
   def food_params
     params.require(:food).permit(:title, :calories, 
                                 :macro_group, 
